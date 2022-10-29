@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		#tab {
+			width: 50%;
+			margin: 0 auto;
+		}
+
+		.tab-head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+		}
+
+		.tab-head>a {
+			flex: 1;
+			display: block;
+			background-color: #eaeaea;
+			text-align: center;
+			padding: 10px;
+			color: #000;
+			font-weight: bold;
+		}
+
+		.tab-head>a.active {
+			background-color: #000;
+			color: #fff;
+		}
+
+		.tab-cont>div {
+			display: none;
+		}
+
+		.tab-cont>div.active {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="tab">
+		<div class="tab-head">
+			<a href="#tab-1" class="active">Menu1</a>
+			<a href="#tab-2">Menu2</a>
+			<a href="#tab-3">Menu3</a>
+		</div>
+		<div class="tab-cont">
+			<div id="tab-1" class="active">
+				<h1>menu1</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga quas natus laborum dolore error hic
+					nihil sequi recusandae. Delectus quisquam laboriosam expedita ipsa, minima modi blanditiis
+					exercitationem distinctio voluptate dolores, autem ex molestias ullam consequatur, rem perferendis
+					nobis. Iure corrupti tempore delectus laudantium repellat, quae molestiae culpa ratione saepe
+					blanditiis autem nam rerum eaque at est, ut vero adipisci. Ullam illum maiores rerum placeat nisi
+					quas vel delectus, quos tempore ab sit, reiciendis ducimus ad, voluptas facere. Sunt dolorem aliquam
+					doloremque. Veniam, rem fugiat, quaerat atque minima consequatur, unde incidunt laudantium ea nemo
+					distinctio. Nesciunt tempora amet incidunt id. Necessitatibus.</p>
+			</div>
+			<div id="tab-2">
+				<h1>menu2</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga quas natus laborum dolore error hic
+					nihil sequi recusandae. Delectus quisquam laboriosam expedita ipsa, minima modi blanditiis
+					exercitationem distinctio voluptate dolores, autem ex molestias ullam consequatur, rem perferendis
+					nobis. Iure corrupti tempore delectus laudantium repellat, quae molestiae culpa ratione saepe
+					blanditiis autem nam rerum eaque at est, ut vero adipisci. Ullam illum maiores rerum placeat nisi
+					quas vel delectus, quos tempore ab sit, reiciendis ducimus ad, voluptas facere. Sunt dolorem aliquam
+					doloremque. Veniam, rem fugiat, quaerat atque minima consequatur, unde incidunt laudantium ea nemo
+					distinctio. Nesciunt tempora amet incidunt id. Necessitatibus.</p>
+			</div>
+			<div id="tab-3">
+				<h1>menu3</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga quas natus laborum dolore error hic
+					nihil sequi recusandae. Delectus quisquam laboriosam expedita ipsa, minima modi blanditiis
+					exercitationem distinctio voluptate dolores, autem ex molestias ullam consequatur, rem perferendis
+					nobis. Iure corrupti tempore delectus laudantium repellat, quae molestiae culpa ratione saepe
+					blanditiis autem nam rerum eaque at est, ut vero adipisci. Ullam illum maiores rerum placeat nisi
+					quas vel delectus, quos tempore ab sit, reiciendis ducimus ad, voluptas facere. Sunt dolorem aliquam
+					doloremque. Veniam, rem fugiat, quaerat atque minima consequatur, unde incidunt laudantium ea nemo
+					distinctio. Nesciunt tempora amet incidunt id. Necessitatibus.</p>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	{
+		const tabHead = document.querySelectorAll('.tab-head > a'),
+			tabCont = document.querySelectorAll('.tab-cont > div');
+
+		tabHead.forEach(function (val) {
+			val.addEventListener('click', tabFunc);
+		});
+
+		function tabFunc(e) {
+			e.preventDefault();
+			let tabAttr = e.target.getAttribute('href');
+			tabAttr = tabAttr.replace('#', '');
+
+			tabCont.forEach(function (val) {
+				if (val.id == tabAttr) {
+					val.classList.add('active');
+				} else {
+					val.classList.remove('active');
+				}
+			})
+
+			for (let i = 0; i < tabHead.length; i++) {
+				tabHead[i].classList.remove('active');
+				this.classList.add('active');
+			}
+		}
+	}
+</script>
+
+</html>
