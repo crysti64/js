@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="base.css">
+	<style>
+		.container {
+			position: relative;
+			width: 100%;
+			overflow: hidden;
+		}
+
+		.slider-container {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+		}
+
+		.slider-container li {
+			position: absolute;
+			width: 100%;
+			height: 100vh;
+		}
+
+		.slider-container li img {
+			width: 100%;
+		}
+
+		.slider-container.animated {
+			transition: left .5s ease-in-out;
+		}
+
+		.slide {
+			text-align: center;
+			padding: 5em 10em;
+		}
+
+		.slide strong {
+			display: block;
+			font-size: 70px;
+			padding: 30px;
+		}
+
+		.slide p {
+			font-size: 18px;
+			line-height: 30px;
+		}
+
+		#prev,
+		#next {
+			display: block;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 70px;
+			height: 70px;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: #fff;
+			text-align: center;
+			line-height: 70px;
+			border-radius: 50%;
+		}
+
+		button {
+			margin: 3em 0 0;
+			padding: 10px 100px;
+			border-radius: 30px;
+			text-align: center;
+			line-height: 30px;
+			background-color: bisque;
+			color: #000;
+			font-size: 20px;
+		}
+
+		#prev {
+			transform: translateX(-500px);
+		}
+
+		#next {
+			transform: translateX(500px);
+		}
+
+		#prev.disabled,
+		#next.disabled {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<ul class="slider-container simple-list" id="slider">
+			<li class="slide">
+				<strong>Lorem, ipsum.1</strong>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, cum maxime quae minus voluptatem
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, quia quasi? Architecto voluptas in,
+					repellat tenetur non sit dolore harum, doloribus autem aliquam modi, deserunt itaque temporibus
+					totam? Veniam, iure? Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque fuga nihil
+					nesciunt quidem, repudiandae quas dolorem accusantium magnam maxime. Sint voluptatem quisquam
+					doloribus quam eos veniam at aperiam rerum excepturi.
+					corrupti necessitatibus unde consectetur. Autem, explicabo.</p>
+				<button>시작하기</button>
+			</li>
+			<li class="slide">
+				<strong>title2</strong>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, cum maxime quae minus voluptatem
+					corrupti necessitatibus unde consectetur. Autem, explicabo.</p>
+			</li>
+			<li class="slide">
+				<strong>title3</strong>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, cum maxime quae minus voluptatem
+					corrupti necessitatibus unde consectetur. Autem, explicabo.</p>
+			</li>
+			<li class="slide">
+				<strong>title4</strong>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, cum maxime quae minus voluptatem
+					corrupti necessitatibus unde consectetur. Autem, explicabo.</p>
+			</li>
+		</ul>
+		<a href="" id="prev">이전</a>
+		<a href="" id="next">다음</a>
+	</div>
+
+	<script>
+		const slideWrapper = document.querySelector('.container'),
+			slideContainer = document.querySelector('.slider-container'),
+			slides = document.querySelectorAll('.slide'),
+			slideCount = slides.length,
+			slidePrev = document.querySelector('#prev'),
+			slideNext = document.querySelector('#next');
+
+		let slideHeight = 0,
+			currentIdx = 0;
+
+
+		slides.forEach(function (elem, idx) {
+			elem.style.left = idx * 100 + '%';
+			if (elem.offsetHeight > slideHeight) {
+				slideHeight = elem.offsetHeight
+			}
+			slideWrapper.style.height = slideHeight + 'px';
+			slideContainer.style.height = slideHeight + 'px';
+		});
+
+		function goToSlide(idx) {
+			slideContainer.style.left = idx * -100 + '%';
+			currentIdx = idx;
+
+			slideContainer.classList.add('animated');
+		};
+
+		slidePrev.addEventListener('click', function (e) {
+			e.preventDefault();
+			if (currentIdx != 0) {
+				goToSlide(currentIdx - 1);
+			} else {
+				goToSlide(slideCount - 1);
+			}
+		});
+		slideNext.addEventListener('click', function (e) {
+			e.preventDefault();
+			if (currentIdx == slideCount - 1) {
+				goToSlide(0);
+			} else {
+				goToSlide(currentIdx + 1);
+			}
+		});
+	</script>
+</body>
+
+</html>

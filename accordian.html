@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="base.css">
+	<style>
+		.container {
+			width: 80%;
+			margin: 70px auto;
+			position: relative;
+		}
+
+		#btn-collapse {
+			padding: 10px;
+			background-color: cornflowerblue;
+			border-radius: 5px;
+			color: #fff;
+			margin: 20px 0;
+		}
+
+		h2 {
+			font-size: 40px;
+			padding: 0 0 30px;
+		}
+
+		#faq .panel-heading {
+			background-color: #000;
+			color: #fff;
+			padding: 10px;
+			border-top: 1px solid #fff;
+			cursor: pointer;
+		}
+
+		#faq .panel-question.active .panel-body {
+			display: block;
+		}
+
+		#faq .panel-body {
+			background-color: #fff;
+			padding: 20px 20px 30px;
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<button id="btn-collapse">Collapse All</button>
+		<h2>accordian</h2>
+		<section id="faq">
+			<div class="panel-question">
+				<div class="panel-heading">test1</div>
+				<div class="panel-body" id="thison">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem sint quod accusantium distinctio
+					similique doloribus modi ab labore! Sit, veniam.
+				</div>
+			</div>
+			<div class="panel-question">
+				<div class="panel-heading">test2</div>
+				<div class="panel-body" id="thison">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem sint quod accusantium distinctio
+					similique doloribus modi ab labore! Sit, veniam. Lorem ipsum dolor sit amet consectetur adipisicing
+					elit. Sequi accusantium blanditiis explicabo exercitationem consectetur eum temporibus nostrum
+					doloremque minima molestias.
+				</div>
+			</div>
+			<div class="panel-question">
+				<div class="panel-heading">test3</div>
+				<div class="panel-body" id="thison">
+					elit. Sequi accusantium blanditiis explicabo exercitationem consectetur eum temporibus nostrum
+					doloremque minima molestias.
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script>
+		const btnCollapse = document.querySelector('#btn-collapse'),
+			question = document.querySelectorAll('.panel-question'),
+			heading = document.querySelectorAll('.panel-heading'),
+			body = document.querySelectorAll('.panel-body');
+
+		question[0].classList.add('active');
+		heading.forEach(function (elem, idx) {
+			elem.addEventListener('click', function () {
+				question.forEach(function (elem) {
+					elem.classList.remove('active');
+				})
+				this.parentElement.classList.add('active');
+			});
+		});
+
+		btnCollapse.addEventListener('click', function () {
+			question.forEach(function (elem) {
+				elem.classList.add('active');
+				console.log(question);
+			});
+		});
+	</script>
+</body>
+
+</html>
