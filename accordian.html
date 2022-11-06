@@ -35,14 +35,13 @@
 			cursor: pointer;
 		}
 
-		#faq .panel-question.active .panel-body {
+		/* #faq .panel-question.active .panel-body {
 			display: block;
-		}
+		} */
 
 		#faq .panel-body {
 			background-color: #fff;
 			padding: 20px 20px 30px;
-			display: none;
 		}
 	</style>
 </head>
@@ -52,16 +51,16 @@
 		<button id="btn-collapse">Collapse All</button>
 		<h2>accordian</h2>
 		<section id="faq">
-			<div class="panel-question">
+			<div class="panel-question active">
 				<div class="panel-heading">test1</div>
-				<div class="panel-body" id="thison">
+				<div class="panel-body">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem sint quod accusantium distinctio
 					similique doloribus modi ab labore! Sit, veniam.
 				</div>
 			</div>
 			<div class="panel-question">
 				<div class="panel-heading">test2</div>
-				<div class="panel-body" id="thison">
+				<div class="panel-body">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem sint quod accusantium distinctio
 					similique doloribus modi ab labore! Sit, veniam. Lorem ipsum dolor sit amet consectetur adipisicing
 					elit. Sequi accusantium blanditiis explicabo exercitationem consectetur eum temporibus nostrum
@@ -70,7 +69,7 @@
 			</div>
 			<div class="panel-question">
 				<div class="panel-heading">test3</div>
-				<div class="panel-body" id="thison">
+				<div class="panel-body">
 					elit. Sequi accusantium blanditiis explicabo exercitationem consectetur eum temporibus nostrum
 					doloremque minima molestias.
 				</div>
@@ -84,22 +83,35 @@
 			heading = document.querySelectorAll('.panel-heading'),
 			body = document.querySelectorAll('.panel-body');
 
-		question[0].classList.add('active');
 		heading.forEach(function (elem, idx) {
 			elem.addEventListener('click', function () {
 				question.forEach(function (elem) {
 					elem.classList.remove('active');
 				})
 				this.parentElement.classList.add('active');
+				activateBody();
 			});
 		});
 
+		function activateBody() {
+			var activeQuestion = document.querySelector('.panel-question.active .panel-body');
+			body.forEach(function (elem, idx) {
+				elem.style.display = 'none';
+				activeQuestion.style.display = "block";
+			});
+		}
+
+
+
 		btnCollapse.addEventListener('click', function () {
-			question.forEach(function (elem) {
-				elem.classList.add('active');
-				console.log(question);
+			body.forEach(function (elem, idx) {
+				elem.style.display = "block";
+				elem.parentNode.classList.add('active');
+				// console.log(elem.parentElement);
+				console.log(elem.parentNode);
 			});
 		});
+		activateBody();
 	</script>
 </body>
 

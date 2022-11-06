@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="base.css">
+	<style>
+		.notice {
+			position: fixed;
+			top: 20%;
+			left: 50%;
+			width: 100px;
+			height: 100px;
+			background-color: dodgerblue;
+			color: #fff;
+			line-height: 100px;
+			text-align: center;
+		}
+
+		button {
+			border: 1px solid #ccc;
+			padding: 10px;
+			border-radius: 5px;
+			background-color: #333;
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<button id="cookieDel">쿠키삭제</button>
+	<div class="notice">notice</div>
+	<script>
+		const currentCookie = document.cookie;
+
+		if (currentCookie.indexOf('ABC') > -1) {
+			document.querySelector('.notice').style.display = "none";
+		} else {
+			document.querySelector('.notice').style.display = "block";
+		}
+
+		const date = new Date();
+		date.setDate(date.getDate() + 7);
+
+		let setCookie = "CookieName = ABC;"
+		setCookie += "expires = " + date.toUTCString();
+
+		document.cookie = setCookie;
+
+		function deleteCookie() {
+			const date = new Date();
+			date.setDate(date.getDate() - 1);
+
+			let setCookie = "CookieName = ABC;"
+			setCookie += "expires = " + date.toUTCString();
+
+			document.cookie = setCookie;
+		}
+		document.querySelector('#cookieDel').addEventListener('click', deleteCookie);
+	</script>
+</body>
+
+</html>

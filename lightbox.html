@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="base.css">
+	<style>
+		.gallery {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+
+		#lightbox-overlay {
+			position: fixed;
+			visibility: hidden;
+			pointer-event: none;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			z-index: 1;
+			background-color: rgba(0, 0, 0, 0.7);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#lightbox-overlay.visible {
+			visibility: visible;
+			pointer-event: auto;
+		}
+
+		#lightbox-overlay img {
+			width: 80%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="gallery-container">
+		<ul class="gallery">
+			<li>
+				<a href="#none"><img
+						src="https://i.picsum.photos/id/14/367/267.jpg?hmac=TbT8rXUKlWmCUhgl5NDXz283dV3FiFhR0tgREh-fzFo"
+						alt=""
+						data-lightbox="https://i.picsum.photos/id/14/2500/1667.jpg?hmac=ssQyTcZRRumHXVbQAVlXTx-MGBxm6NHWD3SryQ48G-o"></a>
+			</li>
+			<li>
+				<a href="#none"><img
+						src="https://i.picsum.photos/id/13/367/267.jpg?hmac=PlowotpQVsKI5u9zmCSxPrAdWuH7CqFxaqGgk5IbLtk"
+						alt=""
+						data-lightbox="https://i.picsum.photos/id/13/2500/1667.jpg?hmac=SoX9UoHhN8HyklRA4A3vcCWJMVtiBXUg0W4ljWTor7s"></a>
+			</li>
+			<li>
+				<a href="#none"><img
+						src="https://i.picsum.photos/id/20/367/267.jpg?hmac=h8YwkzRUiuyBhJ-zQTrSCYop1hhNGtW00nITwHy1V4I"
+						alt=""
+						data-lightbox="https://i.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I"></a>
+			</li>
+			<li>
+				<a href="#none"><img
+						src="https://i.picsum.photos/id/23/367/267.jpg?hmac=Xe34WMsXULAIXjj89fjWplXEU02eI0YySPFKw1fARss"
+						alt=""
+						data-lightbox="https://i.picsum.photos/id/23/3887/4899.jpg?hmac=2fo1Y0AgEkeL2juaEBqKPbnEKm_5Mp0M2nuaVERE6eE"></a>
+			</li>
+		</ul>
+	</div>
+	<div id="lightbox-overlay"><img src="" alt="" id="lightbox-images"></div>
+
+	<script>
+		const boxBtnElem = document.querySelectorAll('.gallery>li>a'),
+			lightboxOverlay = document.querySelector('#lightbox-overlay'),
+			lightboxOverlayImg = document.querySelector('#lightbox-overlay>img');
+
+		boxBtnElem.forEach(function (elem, idx) {
+			let dataLightbox = elem.childNodes[0].getAttribute('data-lightbox');
+			elem.addEventListener('click', function (e) {
+				e.preventDefault();
+				lightboxOverlay.classList.add('visible');
+				lightboxOverlayImg.setAttribute('src', dataLightbox);
+			});
+		});
+
+		lightboxOverlay.addEventListener('click', function () {
+			lightboxOverlay.classList.remove('visible');
+			lightboxOverlayImg.setAttribute('src', '');
+		})
+	</script>
+</body>
+
+</html>

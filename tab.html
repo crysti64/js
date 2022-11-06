@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="base.css">
+	<style>
+		.tab-wrapper {
+			width: 50%;
+			margin: 5em auto;
+		}
+
+		.tab-menu {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+		}
+
+		.tab-menu>li {
+			flex: 1;
+			background-color: #ccc;
+			padding: 10px;
+		}
+
+		.tab-menu>li>a {
+			display: block;
+		}
+
+		#tab-content>div {
+			display: none;
+			padding: 10px;
+			height: 100px;
+			background-color: #eaeaea;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="tab-wrapper">
+		<ul class="tab-menu">
+			<li> <a href="#tabs-1">menu1</a> </li>
+			<li> <a href="#tabs-2">menu2</a> </li>
+			<li> <a href="#tabs-3">menu3</a> </li>
+		</ul>
+		<div id="tab-content">
+			<div id="tabs-1">1Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis, vero.</div>
+			<div id="tabs-2">2Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis, 3vero.</div>
+			<div id="tabs-3">3Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis, vero.</div>
+		</div>
+	</div>
+	</div>
+
+	<script>
+		const tabsElem = document.querySelectorAll('.tab-menu>li>a'),
+			tabsCont = document.querySelectorAll('#tab-content>div');
+
+
+		tabsCont[0].style.display = 'block';
+
+		tabsElem.forEach(function (elem, idx) {
+			elem.addEventListener('click', function (e) {
+				e.preventDefault();
+				tabsCont.forEach(function (elem) {
+					elem.style.display = 'none';
+				});
+				tabsCont[idx].style.display = 'block';
+			});
+		});
+	</script>
+</body>
+
+</html>
